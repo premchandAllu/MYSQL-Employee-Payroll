@@ -36,4 +36,11 @@ INSERT INTO employee_payroll(name , salary , start) VALUES
  ```
  SELECT * FROM employee_payroll;
  ```
- 
+### UC-5 Retrieving data of a particular person
+```
+SELECT SALARY FROM employee_payroll WHERE NAME = 'Bill';
+```
+#### Checking the list of persons who joined after a particular date
+```
+SELECT * FROM employee_payroll WHERE start BETWEEN CAST('2019-01-01' AS DATE) AND DATE(NOW());
+```
