@@ -55,3 +55,14 @@ UPDATE employee_payroll SET GENDER = M WHERE NAME='Bill' Or NAME='Charlie';
 ```
 #### Show the Table
 ``` SELECT * FROM employee_payroll;```
+### UC-7 Ability to Find Sum,Avg,Max,Min,Count of employee_payroll
+#### Total Salary According to Gender
+```SELECT GENDER,SUM(SALARY) From employee_payroll GROUP BY GENDER;```
+#### Average Salary for Each Gender
+```SELECT GENDER,AVG(SALARY) From employee_payroll GROUP BY GENDER;```
+#### Maximum Salary for each Gender
+```SELECT GENDER,MIN(SALARY) From employee_payroll GROUP BY GENDER;```
+#### Minimum Salary for each Gender
+`SELECT GENDER,MIN(SALARY) From employee_payroll GROUP BY GENDER;`
+#### Count Of Persons in each Gender
+`SELECT GENDER,COUNT(SALARY) From employee_payroll GROUP BY GENDER;`
