@@ -44,3 +44,14 @@ SELECT SALARY FROM employee_payroll WHERE NAME = 'Bill';
 ```
 SELECT * FROM employee_payroll WHERE start BETWEEN CAST('2019-01-01' AS DATE) AND DATE(NOW());
 ```
+### UC-6 Adding Column To Employee Payroll Table
+```
+ALTER TABLE employee_payroll ADD GENDER CHAR(1) After NAME;
+```
+#### Added Query to Set Gender
+```
+UPDATE employee_payroll SET GENDER= F WHERE NAME='Terisa';
+UPDATE employee_payroll SET GENDER = M WHERE NAME='Bill' Or NAME='Charlie';
+```
+#### Show the Table
+``` SELECT * FROM employee_payroll;```
