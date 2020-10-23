@@ -11,3 +11,17 @@ show databases;
 ```
 use payroll_service;
 ```
+### UC-2 Create Table employee_payroll
+```
+ CREATE TABLE employee_payroll 
+ ->( 
+ ->  ID      int unsigned  NOT NULL AUTO_INCREMENT,
+ ->  NAME    varchar(150)  NOT NULL, 
+ ->  SALARY  double        NOT NULL,
+ ->  START   DATE          NOT NULL, 
+ ->  Primary Key(ID));
+```
+#### See the Table
+```
+DESRIBE employee_payroll;
+```
