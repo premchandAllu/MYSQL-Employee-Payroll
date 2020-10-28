@@ -97,3 +97,9 @@ UPDATE employee_payroll SET GENDER = M WHERE NAME='Bill' Or NAME='Charlie';
 
 #### Adding net_pay after tax
 ```ALTER TABLE employee_payroll ADD NET_PAY Double NOT NULL AFTER TAX;```
+
+### UC-10 Ability to Add Teresa to Sales And Marketing Department
+```
+UPDATE employee_payroll SET DEPARTMENT='Sales' where NAME='Terisa';
+INSERT into employee_payroll (NAME,DEPARTMENT,GENDER,BASIC_PAY,DEDUCTIONS,TAXABLE_PAY,TAX,NET_PAY,START)
+VALUES('Terisa', 'Marketing', 'F', 200000, 50000, 150000, 50000, 100000, '2018-01-03');
