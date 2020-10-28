@@ -55,6 +55,7 @@ UPDATE employee_payroll SET GENDER = M WHERE NAME='Bill' Or NAME='Charlie';
 ```
 #### Show the Table
 ``` SELECT * FROM employee_payroll;```
+
 ### UC-7 Ability to Find Sum,Avg,Max,Min,Count of employee_payroll
 #### Total Salary According to Gender
 ```SELECT GENDER,SUM(SALARY) From employee_payroll GROUP BY GENDER;```
@@ -66,3 +67,16 @@ UPDATE employee_payroll SET GENDER = M WHERE NAME='Bill' Or NAME='Charlie';
 `SELECT GENDER,MIN(SALARY) From employee_payroll GROUP BY GENDER;`
 #### Count Of Persons in each Gender
 `SELECT GENDER,COUNT(SALARY) From employee_payroll GROUP BY GENDER;`
+
+### UC-8 Ability to Extend employee_payroll to Store Phone No,Address,Department
+#### Add Column Phone No after NAME
+``` ALTER TABLE employee_payroll ADD PHONE_NUMBER VARCHAR(250) AFTER NAME;```
+#### Add Column Address After Phone No
+```ALTER TABLE employee_payroll ADD ADDRESS VARCHAR(250) AFTER PHONE_NUMBER;```
+#### Add Column Department After Address
+``` ALTER TABLE employee_payroll ADD DEPARTMENT VARCHAR(250) NOT NULL AFTER ADDRESS;```
+#### Set Default Address to TBD
+``` UPDATE employee_payroll SET ADDRESS ='TBD';```
+
+#### View Table
+``` SELECT * FROM employee_payroll;```
