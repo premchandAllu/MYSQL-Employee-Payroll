@@ -80,3 +80,20 @@ UPDATE employee_payroll SET GENDER = M WHERE NAME='Bill' Or NAME='Charlie';
 
 #### View Table
 ``` SELECT * FROM employee_payroll;```
+
+### UC-9 Ability to extend employee_payroll to store Basic Pay,Deductions,Taxable Pay,Income Tax,Net Pay
+
+#### Changing salary column name to basic_pay
+```ALTER TABLE employee_payroll RENAME COLUMN SALARY TO BASIC_PAY;```
+
+#### Adding deductions after basic_pay
+```ALTER TABLE employee_payroll ADD DEDUCTIONS DOUBLE NOT NULL AFTER BASIC_PAY;```
+
+#### Adding taxable_pay after deductions
+```ALTER TABLE employee_payroll ADD TAXABLE_PAY DOUBLE NOT NULL AFTER DEDUCTIONS;```
+
+#### Adding tax after taxable_pay
+```ALTER TABLE employee_payroll ADD TAX DOUBLE NOT NULL AFTER TAXABLE_PAY;```
+
+#### Adding net_pay after tax
+```ALTER TABLE employee_payroll ADD NET_PAY Double NOT NULL AFTER TAX;```
