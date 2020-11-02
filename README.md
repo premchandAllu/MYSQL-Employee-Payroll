@@ -103,3 +103,100 @@ UPDATE employee_payroll SET GENDER = M WHERE NAME='Bill' Or NAME='Charlie';
 UPDATE employee_payroll SET DEPARTMENT='Sales' where NAME='Terisa';
 INSERT into employee_payroll (NAME,DEPARTMENT,GENDER,BASIC_PAY,DEDUCTIONS,TAXABLE_PAY,TAX,NET_PAY,START)
 VALUES('Terisa', 'Marketing', 'F', 200000, 50000, 150000, 50000, 100000, '2018-01-03');
+```
+### UC11 - Implement the ER Diagram into Payroll Service DataBase
+
+#### Create Company Table
+```CREATE TABLE company
+    -> (
+    -> company_id      INT NOT NULL PRIMARY KEY,
+    -> company_name    VARCHAR(150) NOT NULL
+    -> );
+```
+#### Create Table Employee Details
+```CREATE TABLE employee_details
+    -> (
+    -> employee_id     INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> company_id      INT NOT NULL,
+    -> FOREIGN KEY     (company_id) REFERENCES company (company_id),
+    -> name            VARCHAR(150) NOT NULL,
+    -> phone_number    BIGINT(15) NOT NULL,
+    -> address         VARCHAR(250) NOT NULL,
+    -> gender          CHAR(1) NOT NULL,
+    -> start_date      DATE NOT NULL
+    -> );
+```
+#### Create Table Payroll
+```CREATE TABLE payroll
+    -> (
+    -> employee_id     INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> FOREIGN KEY     (employee_id) REFERENCES employee (employee_id),
+    -> basic_pay       DOUBLE NOT NULL,
+    -> deductions      DOUBLE NOT NULL,
+    -> taxable_pay     DOUBLE NOT NULL,
+    -> tax             DOUBLE NOT NULL,
+    -> net_pay         DOUBLE NOT NULL
+    -> );
+```
+#### Create Table Department
+```CREATE TABLE department
+    -> (
+    -> department_id   INT NOT NULL PRIMARY KEY,
+    -> department_name VARCHAR(150) NOT NULL
+    -> );
+```
+#### Create Table Employee Department
+```CREATE TABLE employee_department
+    -> (
+    -> employee_id     INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    -> FOREIGN KEY     (employee_id) REFERENCES employee (employee_id),
+    -> department_id   INT NOT NULL,
+    -> FOREIGN KEY     (department_id) REFERENCES department (department_id)
+    -> );
+```
+### Inserting values into the tables created
+#### Insert into Company Table
+```INSERT INTO company VALUES
+    -> (1,'Google'),
+    -> (2,'Microsoft'),
+    -> (3,'Capgemini');
+```
+#### Insert into Employee Table
+```INSERT INTO employee VALUES
+    -> (101, 1, 'Bill', '9494118273', 'Hyderabad', 'M', '2018-01-01'),
+    -> (102, 2, 'Terisa', '7207020464', 'Nizamabad', 'F', '2019-11-11'),
+    -> (103, 3, 'Charlie', '9440293758', 'Chennai', 'M', '2020-05-21');
+```
+#### Insert into Payroll Table
+```INSERT INTO payroll VALUES
+    -> ('101', 4000000.00, 1000000.00, 3000000.00, 500000.00, 2500000.00),
+    -> ('102', 5000000.00, 1500000.00, 3500000.00, 1000000.00, 2500000.00),
+    -> ('103', 6000000.00, 2000000.00, 4000000.00, 1500000.00, 2500000.00);
+```
+#### Insert into Department Table
+```INSERT INTO department VALUES
+    -> (110,'Sales'),
+    -> (111,'Marketing'),
+    -> (112,'Finance');
+```
+#### Insert into employee Department Table
+```INSERT INTO employee_department VALUES
+    -> (101,110),
+    -> (102,111),
+    -> (103,112),
+    -> (102,110);
+```
+### UC12 - Ability to ensure all retrieve queries done are working with new table structure
+```SELECT * FROM company;
+SELECT * FROM employee_details;
+SELECT * FROM payroll;
+SELECT * FROM department;
+SELECT * FROM employee_department;
+SELECT salary FROM payroll WHERE name = 'Bill';
+SELECT * FROM payroll WHERE start BETWEEN CAST('2018-01-01' AS DATE) and DATE(NOW());
+SELECT SUM(p.net_pay), e.gender FROM employee e LEFT JOIN payroll p ON p.employee_id = e.employee_id GROUP BY e.gender;
+SELECT AVG(p.net_pay), e.gender FROM employee e LEFT JOIN payroll p ON p.employee_id = e.employee_id GROUP BY e.gender;
+SELECT MIN(p.net_pay), e.gender FROM employee e LEFT JOIN payroll p ON p.employee_id = e.employee_id GROUP BY e.gender;
+SELECT MAX(p.net_pay), e.gender FROM employee e LEFT JOIN payroll p ON p.employee_id = e.employee_id GROUP BY e.gender;
+SELECT COUNT(p.net_pay), e.gender FROM employee e LEFT JOIN payroll p ON p.employee_id = e.employee_id GROUP BY e.gender;
+```
